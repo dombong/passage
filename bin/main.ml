@@ -473,10 +473,10 @@ end
 
 module Get = struct
   module Output = struct
-    let print_as_qrcode ~secret_name ~secret =
-      match Qrc.encode secret with
-      | None -> Shell.die "Failed to encode %s as QR code. Data capacity exceeded!" (show_name secret_name)
-      | Some m -> Qrc_fmt.pp_utf_8_half ~invert:true Format.std_formatter m
+    let print_as_qrcode ~secret_name ~secret = 
+      (* noop *)
+      print_endline "not supported";
+      ()
 
     let save_to_clipboard_exn ~secret =
       let read_clipboard () = Shell.xclip_read_clipboard Config.x_selection in

@@ -42,6 +42,5 @@
    (and
     :with-dev-setup
     (= 0.26.2)))
-  qrc
   re2
   sedlex))
