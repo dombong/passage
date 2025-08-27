@@ -5,12 +5,16 @@
       url = "github:hercules-ci/flake-parts";
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
+    extunix = {
+      url = "github:dombong/extunix?rev=9429594ac9fbd8811f368a6889669f93e8609d6d";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
   outputs = inputs@{ flake-parts, ... }:
     flake-parts.lib.mkFlake { inherit inputs; } {
 
       systems = [ "x86_64-linux" ];
-      perSystem = { pkgs, ... }:
+      perSystem = { pkgs, system, ... }:
         ############################ PACKAGES ############################
         let
           ocamlPackages = pkgs.ocaml-ng.ocamlPackages_5_3;
@@ -41,25 +45,6 @@
               mkdir -p $out/lib/ocaml/${ocamlPackages.ocaml.version}/site-lib/stublibs
             '';
           };
-          extunix = ocamlPackages.buildDunePackage {
-            pname = "extunix";
-            version = "20250621.0";
-            minimumOCamlVersion = "4.13";
-            src = pkgs.fetchFromGitHub {
-              owner = "dombong";
-              repo = "extunix";
-              rev = "5b426e7b912b1bcd6d0acf2d96ef0f94dd12edeb";
-              sha256 = "sha256-C3jPXOdRD56NnDqzvmV7Lpxw5JhMOp/21N6qCofyzy0=";
-            };
-            nativeBuildInputs = with ocamlPackages; [ findlib ocaml ];
-
-            buildInputs = with ocamlPackages; [
-              ocaml
-              findlib
-              ppxlib
-              dune-configurator
-            ];
-          };
           devkitBuildInputs = with ocamlPackages; [
             ocaml
             extlib
@@ -78,7 +63,7 @@
             opam
             ocaml
             libevent
-            extunix
+            inputs.extunix.packages.${system}.default
             pcre.dev
             libz.dev
             libzip.dev
@@ -128,7 +113,7 @@
             findlib
             atdgen-runtime
           ]);
-          depPackages = [ devkit extunix libevent ];
+          depPackages = [ devkit inputs.extunix.packages.${system}.default libevent ];
           buildShellInputs = buildShellInputs' ++ depPackages ++ devInputs
             ++ buildInputs;
         in {
