@@ -92,6 +92,14 @@
               sha256 = "sha256-uAq2BGTqdXDv9xeJFeH1Rjjq8iT4YHrCgPUOlbJ1nL4=";
             };
 
+            # Fix for newer Lwt 6.1+ requiring 'id' method in Lwt_engine.abstract
+            postPatch = ''
+              # Add engine_id type extension at top of file
+              sed -i '1i type Lwt_engine.engine_id += Devkit_libevent\n' lwt_engines.ml
+              # Add id method after inherit line
+              sed -i '/inherit Lwt_engine.abstract/a\  method id = Devkit_libevent' lwt_engines.ml
+            '';
+
             buildInputs = buildShellInputs';
           };
           passage = ocamlPackages.buildDunePackage {
