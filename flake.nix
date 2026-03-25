@@ -6,7 +6,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     extunix = {
-      url = "github:dombong/extunix?rev=9429594ac9fbd8811f368a6889669f93e8609d6d";
+      url = "github:dombong/extunix?rev=3b6d20910a420d26ad3cceb6303e644e60839714";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
@@ -91,14 +91,6 @@
               rev = "26e6648e5dafcc54d65d7f5356e8617f5f351250";
               sha256 = "sha256-uAq2BGTqdXDv9xeJFeH1Rjjq8iT4YHrCgPUOlbJ1nL4=";
             };
-
-            # Fix for newer Lwt 6.1+ requiring 'id' method in Lwt_engine.abstract
-            postPatch = ''
-              # Add engine_id type extension at top of file
-              sed -i '1i type Lwt_engine.engine_id += Devkit_libevent\n' lwt_engines.ml
-              # Add id method after inherit line
-              sed -i '/inherit Lwt_engine.abstract/a\  method id = Devkit_libevent' lwt_engines.ml
-            '';
 
             buildInputs = buildShellInputs';
           };

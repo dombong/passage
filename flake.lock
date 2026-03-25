@@ -8,17 +8,17 @@
         ]
       },
       "locked": {
-        "lastModified": 1756274690,
-        "narHash": "sha256-UQLeHDBmN02VMnS9nNfrSTXjRvRzBqREwSju8yM1Z14=",
+        "lastModified": 1774410841,
+        "narHash": "sha256-DFi+C37PDmONHkAy5ogCzp4ICz/Jy3Vf0c2tITIcOs4=",
         "owner": "dombong",
         "repo": "extunix",
-        "rev": "9429594ac9fbd8811f368a6889669f93e8609d6d",
+        "rev": "3b6d20910a420d26ad3cceb6303e644e60839714",
         "type": "github"
       },
       "original": {
         "owner": "dombong",
         "repo": "extunix",
-        "rev": "9429594ac9fbd8811f368a6889669f93e8609d6d",
+        "rev": "3b6d20910a420d26ad3cceb6303e644e60839714",
         "type": "github"
       }
     },
