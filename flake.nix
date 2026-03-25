@@ -6,7 +6,7 @@
       inputs.nixpkgs-lib.follows = "nixpkgs";
     };
     extunix = {
-      url = "github:dombong/extunix?rev=3b6d20910a420d26ad3cceb6303e644e60839714";
+      url = "github:dombong/extunix?rev=ed4c3f25e167e5dcfc94ea6c63d9e577e9c4f1f6";
       inputs.nixpkgs.follows = "nixpkgs";
     };
   };
